@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Personality</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* Global styles */
+  :root {
+    --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 25%, #a18cd1 50%, #fbc2eb 75%, #8fd3f4 100%);
+    --card-bg: rgba(255, 255, 255, 0.12);
+    --card-border: rgba(255, 255, 255, 0.4);
+    --text-main: #ffffff;
+    --accent-1: #ffb74d;
+    --accent-2: #7e57c2;
+    --accent-3: #26c6da;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    background-image: var(--bg-gradient);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 10px;
+  }
+
+  /* Floating gradient blobs */
+  .blob {
+    position: fixed;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle at 30% 30%, #ffffff33, transparent 60%);
+    filter: blur(18px);
+    opacity: 0.8;
+    z-index: -1;
+    animation: float 16s infinite alternate ease-in-out;
+  }
+  .blob:nth-child(1) {
+    top: -60px;
+    left: -40px;
+  }
+  .blob:nth-child(2) {
+    bottom: -80px;
+    right: -40px;
+    animation-duration: 20s;
+  }
+
+  @keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, -30px) scale(1.1); }
+  }
+
+  /* Main container */
+  .wrapper {
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 32px 26px 36px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(16px);
+  }
+
+  /* Title section */
+  .title-area {
+    text-align: center;
+    margin-bottom: 26px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: linear-gradient(120deg, var(--accent-3), var(--accent-1));
+    color: #263238;
+    font-weight: 600;
+  }
+
+  h1 {
+    margin-top: 14px;
+    font-family: "Quicksand", sans-serif;
+    font-size: 2.3rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .subtitle {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+  /* Section layout */
+  .sections {
+    display: grid;
+    gap: 18px;
+    margin-top: 18px;
+  }
+
+  @media (min-width: 850px) {
+    .sections {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Individual section card */
+  .section-card {
+    position: relative;
+    padding: 16px 16px 18px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .section-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 183, 77, 0.16), rgba(126, 87, 194, 0.12));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    z-index: -1;
+  }
+
+  .section-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .section-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Color ring for subtopic number */
+  .section-head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .number-ring {
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    padding: 2px;
+    background: conic-gradient(from 160deg, #ffb74d, #f06292, #7e57c2, #26c6da, #ffb74d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .number-ring span {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: #121212;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* Modern colorful subtopic font */
+  .section-title {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 700;
+    font-size: 1.02rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: linear-gradient(120deg, #ffeb3b, #ff9800, #ff4081, #7c4dff);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .section-tagline {
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 6px;
+  }
+
+  .section-body {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  /* Conclusion accent */
+  .section-card.conclusion {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(38, 198, 218, 0.3), rgba(124, 77, 255, 0.3));
+  }
+</style>
+</head>
+
+<body>
+  <!-- Floating blobs -->
+  <div class="blob"></div>
+  <div class="blob"></div>
+
+  <div class="wrapper">
+    <div class="card">
+      <div class="title-area">
+        <span class="badge">About Me</span>
+        <h1>My Personality</h1>
+        <p class="subtitle">A colorful snapshot of how values, growth, and positivity shape who I am.</p>
+      </div>
+
+      <div class="sections">
+        <!-- 1. Introduction -->
+        <div class="section-card">
+          <div class="section-head">
+            <div class="number-ring"><span>1</span></div>
+            <div>
+              <div class="section-title">Introduction</div>
+              <div class="section-tagline">Foundations of who I am</div>
+            </div>
+          </div>
+          <p class="section-body">
+            My personality is shaped by my values, experiences, and the lessons I learn every day. I believe in living life with positivity, confidence, and a willingness to improve. I consider myself a person who strives for growth and tries to understand the world with an open mind.
+          </p>
+        </div>
+
+        <!-- 2. Positive Attitude -->
+        <div class="section-card">
+          <div class="section-head">
+            <div class="number-ring"><span>2</span></div>
+            <div>
+              <div class="section-title">Positive Attitude</div>
+              <div class="section-tagline">Seeing light in challenges</div>
+            </div>
+          </div>
+          <p class="section-body">
+            One of the strongest qualities I have is my positive attitude. I try to look at challenges as opportunities to learn something new. Even when situations become difficult, I remind myself to stay calm and search for solutions instead of worrying. This outlook helps me stay motivated and balanced.
+          </p>
+        </div>
+
+        <!-- 3. Curiosity and Learning Spirit -->
+        <div class="section-card">
+          <div class="section-head">
+            <div class="number-ring"><span>3</span></div>
+            <div>
+              <div class="section-title">Curiosity & Learning</div>
+              <div class="section-tagline">Always exploring something new</div>
+            </div>
+          </div>
+          <p class="section-body">
+            I am naturally curious and enjoy learning new things. Whether it is related to academics, skills, or personal development, I like exploring ideas that help me grow. I take my responsibilities seriously and always give my best effort. I believe that continuous learning strengthens my confidence and broadens my understanding.
+          </p>
+        </div>
+
+        <!-- 4. Values and Principles -->
+        <div class="section-card">
+          <div class="section-head">
+            <div class="number-ring"><span>4</span></div>
+            <div>
+              <div class="section-title">Values & Principles</div>
+              <div class="section-tagline">Honesty, kindness, respect</div>
+            </div>
+          </div>
+          <p class="section-body">
+            Honesty, kindness, and respect are the principles that guide my daily life. I treat people with empathy and try to create a positive environment around me. I also believe that strong relationships are built on trust and understanding. These values help me connect with people in a meaningful way.
+          </p>
+        </div>
+
+        <!-- 5. Communication and Relationships -->
+        <div class="section-card">
+          <div class="section-head">
+            <div class="number-ring"><span>5</span></div>
+            <div>
+              <div class="section-title">Communication</div>
+              <div class="section-tagline">Listening and connecting</div>
+            </div>
+          </div>
+          <p class="section-body">
+            I consider myself a good listener and an effective communicator. I respect others’ opinions and try to understand their point of view. This helps me avoid misunderstandings and allows me to build strong and healthy relationships. I enjoy supporting the people around me and offering help whenever they need it.
+          </p>
+        </div>
+
+        <!-- 6. Confidence and Self-Belief -->
+        <div class="section-card">
+          <div class="section-head">
+            <div class="number-ring"><span>6</span></div>
+            <div>
+              <div class="section-title">Confidence</div>
+              <div class="section-tagline">Believing in my journey</div>
+            </div>
+          </div>
+          <p class="section-body">
+            Confidence plays an important role in my personality. I believe in my abilities and I am not afraid to try new things. I take challenges as a chance to grow rather than something to fear. Even if I make mistakes, I learn from them and move forward with determination.
+          </p>
+        </div>
+
+        <!-- 7. Responsibility and Hard Work -->
+        <div class="section-card">
+          <div class="section-head">
+            <div class="number-ring"><span>7</span></div>
+            <div>
+              <div class="section-title">Responsibility</div>
+              <div class="section-tagline">Discipline and dedication</div>
+            </div>
+          </div>
+          <p class="section-body">
+            I am a responsible and hardworking person who always completes tasks on time. I value discipline and dedication because they help me stay focused on my goals. Whenever I commit to something, I put in my best efforts to achieve it without giving up easily.
+          </p>
+        </div>
+
+        <!-- 8. Personal Growth and Goals -->
+        <div class="section-card">
+          <div class="section-head">
+            <div class="number-ring"><span>8</span></div>
+            <div>
+              <div class="section-title">Growth & Goals</div>
+              <div class="section-tagline">Improving every day</div>
+            </div>
+          </div>
+          <p class="section-body">
+            I constantly work on improving myself by learning new skills like communication, teamwork, and time management. I set small goals for myself and work steadily to achieve them. I believe that growth is a continuous process, and every day offers a new lesson.
+          </p>
+        </div>
+
+        <!-- 9. Conclusion -->
+        <div class="section-card conclusion">
+          <div class="section-head">
+            <div class="number-ring"><span>9</span></div>
+            <div>
+              <div class="section-title">Conclusion</div>
+              <div class="section-tagline">Who I am becoming</div>
+            </div>
+          </div>
+          <p class="section-body">
+            Overall, I would describe myself as sincere, motivated, compassionate, and open-minded. I aim to live a meaningful life by improving myself, helping others, and maintaining strong values. I believe that who I am today is the result of my dedication, and who I become tomorrow depends on my willingness to learn and grow.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
